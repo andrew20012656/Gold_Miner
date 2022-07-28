@@ -7,7 +7,7 @@ import javax.swing.*;
 public class GameWin extends JFrame{
 	
 	Bg bg = new Bg();
-	Line line = new Line();
+	Line line = new Line(this);
 	Gold gold = new Gold();
 	
 	Image offScreenImage;

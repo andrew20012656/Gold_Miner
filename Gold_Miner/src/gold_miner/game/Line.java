@@ -15,9 +15,24 @@ public class Line {
 	double n = 0;
 	// direction
 	int direction = 1;
+	// state determines whether the line is swinging or extending.
+	int state;
 	
+	GameWin frame;
+	
+	Line(GameWin frame){this.frame = frame;}
+	
+	void logic() {
+		if(endX > this.frame.gold.x 
+				&& endX <this.frame.gold.x + this.frame.gold.width 
+				&& endY > this.frame.gold.y 
+				&& endY < this.frame.gold.height) {
+			System.out.println(1);
+		}
+	}
 	
 	void paintSelf(Graphics g) {
+		logic();
 		
 		if(n <= 0.1) {
 			direction = 1;
