@@ -8,6 +8,9 @@ public class GameWin extends JFrame{
 	
 	Bg bg = new Bg();
 	Line line = new Line();
+	Gold gold = new Gold();
+	
+	Image offScreenImage;
 	
 	void launch() {
 		this.setVisible(true);
@@ -30,8 +33,14 @@ public class GameWin extends JFrame{
 	
 	@Override
 	public void paint(Graphics g) {
-		bg.paintSelf(g);
-		line.paintSelf(g);
+		offScreenImage = this.createImage(768, 1000);
+		Graphics gImage = offScreenImage.getGraphics();
+		
+		bg.paintSelf(gImage);
+		line.paintSelf(gImage);
+		gold.painSelf(gImage);
+		
+		g.drawImage(offScreenImage, 0, 0, null);
 	}
 	
 	public static void main(String[] args) {
