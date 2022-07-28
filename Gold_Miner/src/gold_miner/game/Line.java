@@ -30,7 +30,7 @@ public class Line {
 		if(endX > this.frame.gold.x 
 				&& endX <this.frame.gold.x + this.frame.gold.width 
 				&& endY > this.frame.gold.y 
-				&& endY < this.frame.gold.height) {
+				&& endY < this.frame.gold.height + this.frame.gold.y) {
 			state = 3;
 		}
 	}
@@ -71,7 +71,17 @@ public class Line {
 				} else {
 					state = 0;
 				}
-				
+			case 3:
+				if(length > 100) {
+					length -= 10;
+					lines(g);
+					this.frame.gold.x = endX - 26; // the gold is 52 x 52 pixels in size
+					this.frame.gold.y = endY;
+				} else {
+					this.frame.gold.x = -150;
+					this.frame.gold.y = -150;
+					state = 0;
+				}
 		}
 		
 		
