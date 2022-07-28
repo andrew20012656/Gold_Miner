@@ -1,6 +1,8 @@
 package gold_miner.game;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -18,6 +20,16 @@ public class GameWin extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setTitle("Gold Miner 2022");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				if(e.getButton() == 1) {
+					line.state = 1;
+				}
+			}
+		});
 		
 		while(true) {
 			repaint();

@@ -16,6 +16,10 @@ public class Line {
 	// direction
 	int direction = 1;
 	// state determines whether the line is swinging or extending.
+	// State 0: swing
+	// State 1: hook
+	// State 2: retrieve
+	// State 3: catch and retrieve
 	int state;
 	
 	GameWin frame;
@@ -27,24 +31,50 @@ public class Line {
 				&& endX <this.frame.gold.x + this.frame.gold.width 
 				&& endY > this.frame.gold.y 
 				&& endY < this.frame.gold.height) {
-			System.out.println(1);
+			state = 3;
 		}
 	}
 	
-	void paintSelf(Graphics g) {
-		logic();
-		
-		if(n <= 0.1) {
-			direction = 1;
-		} else if (n >= 0.9){
-			direction = -1;
-		}
-		n= n + 0.005 * direction;
-		
+	void lines(Graphics g) {
 		endX = (int) (x + length * Math.cos(n * Math.PI));
 		endY = (int) (y + length * Math.sin(n * Math.PI));
 		
 		g.setColor(Color.yellow);
-		g.drawLine(x, y, endX, endY);
+		g.drawLine(x, y, endX, endY); 
+	}
+	
+	void paintSelf(Graphics g) {
+		logic();
+		switch(state) {
+			case 0:
+				if(n <= 0.1) {
+					direction = 1;
+				} else if (n >= 0.9){
+					direction = -1;
+				}
+				n= n + 0.005 * direction;
+				lines(g);
+				break;
+			case 1:
+				if(length < 500) {
+					length = length + 10;
+					
+					lines(g);
+				} else {
+					state = 2;
+				}
+				break;
+			case 2:
+				if(length > 100) {
+					length -= 10;
+					lines(g);
+				} else {
+					state = 0;
+				}
+				
+		}
+		
+		
+		
 	}
 }
