@@ -11,8 +11,10 @@ public class Object {
 	int width;
 	int height;
 	Image img;
+	// whether object can be moved
+	boolean flag;
 	
-	void painSelf(Graphics g) {
+	void paintSelf(Graphics g) {
 		g.drawImage(img, x, y,null);
 	}
 }

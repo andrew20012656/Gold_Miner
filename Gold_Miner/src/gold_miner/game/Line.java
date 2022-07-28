@@ -27,12 +27,16 @@ public class Line {
 	Line(GameWin frame){this.frame = frame;}
 	
 	void logic() {
-		if(endX > this.frame.gold.x 
-				&& endX <this.frame.gold.x + this.frame.gold.width 
-				&& endY > this.frame.gold.y 
-				&& endY < this.frame.gold.height + this.frame.gold.y) {
-			state = 3;
+		for(Object obj: this.frame.objectList) {
+			if(endX > obj.x
+					&& endX < obj.x + obj.width 
+					&& endY > obj.y 
+					&& endY < obj.height + obj.y) {
+				state = 3;
+				obj.flag = true;
+			}
 		}
+		
 	}
 	
 	void lines(Graphics g) {
@@ -75,13 +79,19 @@ public class Line {
 				if(length > 100) {
 					length -= 10;
 					lines(g);
-					this.frame.gold.x = endX - 26; // the gold is 52 x 52 pixels in size
-					this.frame.gold.y = endY;
-				} else {
-					this.frame.gold.x = -150;
-					this.frame.gold.y = -150;
-					state = 0;
-				}
+					for(Object obj: this.frame.objectList) {
+						if(obj.flag) {
+							obj.x = endX - 26; // the gold is 52 x 52 pixels in size
+							obj.y = endY;
+							if(length <= 100) {
+								obj.x = -150;
+								obj.y = -150;
+								obj.flag = false;
+								state = 0;
+							}
+						}
+					}
+				} 
 		}
 		
 		

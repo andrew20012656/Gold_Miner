@@ -3,14 +3,21 @@ package gold_miner.game;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.*;
 
 import javax.swing.*;
 
 public class GameWin extends JFrame{
 	
+	ArrayList<Object> objectList = new ArrayList<>();
 	Bg bg = new Bg();
 	Line line = new Line(this);
-	Gold gold = new Gold();
+	
+	{
+		for(int i = 0; i < 3; i ++) {
+			objectList.add(new Gold());
+		}
+	}
 	
 	Image offScreenImage;
 	
@@ -50,7 +57,10 @@ public class GameWin extends JFrame{
 		
 		bg.paintSelf(gImage);
 		line.paintSelf(gImage);
-		gold.painSelf(gImage);
+		
+		for(Object obj: objectList) {
+			obj.paintSelf(gImage);
+		}
 		
 		g.drawImage(offScreenImage, 0, 0, null);
 	}
