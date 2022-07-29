@@ -14,8 +14,13 @@ public class GameWin extends JFrame{
 	Line line = new Line(this);
 	
 	{
+		// Create golds
 		for(int i = 0; i < 3; i ++) {
 			objectList.add(new Gold());
+		}
+		// Create rocks
+		for(int i = 0; i < 3; i ++) {
+			objectList.add(new Rock());
 		}
 	}
 	
@@ -50,6 +55,7 @@ public class GameWin extends JFrame{
 		}
 	}
 	
+	
 	@Override
 	public void paint(Graphics g) {
 		offScreenImage = this.createImage(768, 1000);
@@ -64,6 +70,7 @@ public class GameWin extends JFrame{
 		
 		g.drawImage(offScreenImage, 0, 0, null);
 	}
+	
 	
 	public static void main(String[] args) {
 		GameWin gameWin = new GameWin();

@@ -81,7 +81,7 @@ public class Line {
 					lines(g);
 					for(Object obj: this.frame.objectList) {
 						if(obj.flag) {
-							obj.x = endX - 26; // the gold is 52 x 52 pixels in size
+							obj.x = endX - obj.getWidth() / 2; // the gold is 52 x 52 pixels in size
 							obj.y = endY;
 							if(length <= 100) {
 								obj.x = -150;

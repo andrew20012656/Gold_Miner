@@ -17,4 +17,9 @@ public class Object {
 	void paintSelf(Graphics g) {
 		g.drawImage(img, x, y,null);
 	}
+
+	public int getWidth() {
+		return width;
+	}
+	
 }
