@@ -22,6 +22,9 @@ public class Line {
 	// State 3: catch and retrieve
 	int state;
 	
+	int hookSpeed = 5;
+	int retrieveSpeed = 5;
+	
 	GameWin frame;
 	
 	Line(GameWin frame){this.frame = frame;}
@@ -61,7 +64,7 @@ public class Line {
 				break;
 			case 1:
 				if(length < 500) {
-					length = length + 10;
+					length = length + hookSpeed;
 					
 					lines(g);
 				} else {
@@ -70,17 +73,19 @@ public class Line {
 				break;
 			case 2:
 				if(length > 100) {
-					length -= 10;
+					length -= retrieveSpeed;
 					lines(g);
 				} else {
 					state = 0;
 				}
 			case 3:
+				int mass = 1;
 				if(length > 100) {
 					length -= 10;
 					lines(g);
 					for(Object obj: this.frame.objectList) {
 						if(obj.flag) {
+							mass = obj.mass;
 							obj.x = endX - obj.getWidth() / 2; // the gold is 52 x 52 pixels in size
 							obj.y = endY;
 							if(length <= 100) {
@@ -91,7 +96,15 @@ public class Line {
 							}
 						}
 					}
-				} 
+				}
+				try {
+					Thread.sleep(mass);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			default:
 		}
 		
 		

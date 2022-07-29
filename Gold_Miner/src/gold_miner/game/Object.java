@@ -13,6 +13,7 @@ public class Object {
 	Image img;
 	// whether object can be moved
 	boolean flag;
+	int mass;
 	
 	void paintSelf(Graphics g) {
 		g.drawImage(img, x, y,null);
